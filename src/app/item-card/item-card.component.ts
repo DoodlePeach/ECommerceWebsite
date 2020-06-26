@@ -16,12 +16,7 @@ export class ItemCardComponent implements OnInit {
   // Maybe can be used to display images too.
   @Input() id : number; 
   // The name which is shown as the title in the card
-  @Input() name : string;  
-  // The description of the item. Only shown if wideMode is set to true.
-  @Input() description : string; 
-  // Dictates whether the card is rendered in wide mode if set to true.
-  // Wide panels have item descriptions in them.
-  @Input() wideMode : boolean;
+  @Input() name : string;
    // The category of the item being displayed.   
   @Input() category : string;
   // The price of the item.
