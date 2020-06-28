@@ -1,0 +1,23 @@
+<div class="mx-auto w-75">
+    <div class="d-flex mt-5 mb-5">
+        <img [src]="displayedItem.url_link" class="w-50">
+
+        <div class="d-flex flex-column ml-5 w-50">
+            <h3>{{displayedItem.name}}</h3>
+            <p>{{displayedItem.description}}</p>
+            <p class="mb-0"><b>Price</b> {{displayedItem.price}}$</p>
+
+            <div class="d-flex just align-items-center mb-3">
+                <b class="p-0 mr-5">Quantity</b>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-light" (click)="decreaseQuantity()">-</button>
+                    <p class="p-0 ml-3 mr-3 mt-0 mb-0">{{quantity}}</p>
+                    <button class="btn btn-light" (click)="increaseQuantity()">+</button>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-dark">Add to cart</button>
+        </div>
+    </div>
+</div>

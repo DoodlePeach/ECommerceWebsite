@@ -1,0 +1,7 @@
+.list-overflow {
+    overflow-x: scroll;
+}
+
+.carousel-inner img {
+    margin: auto;
+}
