@@ -7,7 +7,7 @@ import { ItemModel } from '../item-model'
   styleUrls: ['./item-form.component.css']
 })
 export class ItemFormComponent implements OnInit {
-  model: ItemModel = new ItemModel("", "", "", 0, "")
+  model: ItemModel = new ItemModel("", "", "", "", 0, "")
   submitted = false
 
   onSubmit() : void {
@@ -20,6 +20,5 @@ export class ItemFormComponent implements OnInit {
   ngOnInit(): void {
     let inputField : HTMLInputElement = document.getElementById("price") as HTMLInputElement
     inputField.setCustomValidity("[0-9][0-9]*")
-    console.log("Hello")
   }
 }
