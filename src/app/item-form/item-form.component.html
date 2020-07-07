@@ -1,6 +1,6 @@
 <p>This form adds new items to the database</p>
 
-<form #itemForm="ngForm" (ngSubmit)="onSubmit()">
+<form #itemForm="ngForm" (ngSubmit)="onSubmit(); itemForm.reset()">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name">
@@ -8,7 +8,9 @@
 
     <div class="form-group">
         <label for="category">Category</label>
-        <input type="text" class="form-control" id="category" required [(ngModel)]="model.category" name="category">
+        <select id="category" required [(ngModel)]="model.category" name="category" class="form-control">
+            <option *ngFor="let option of itemService.categories">{{option}}</option>
+        </select>
     </div>
 
     <div class="form-group">
@@ -29,3 +31,8 @@
 
     <button type="submit" class="btn btn-dark" [disabled]="!itemForm.form.valid">Add item to database</button>
 </form>
+
+
+<div *ngIf="submitted" class="alert alert-success m-3">
+    <p class="m-0 text-center">The item has been successfully inserted into the database</p>
+</div>

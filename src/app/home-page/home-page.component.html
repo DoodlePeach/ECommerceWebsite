@@ -17,13 +17,21 @@
 
     <div class="d-flex justify-content-center">
         <div class="d-flex flex-column w-75 m-4">
-            <app-search-bar>
-            </app-search-bar>
+            <div class="input-group mt-4 mb-4">
+                <input type="text" class="form-control  w-50" id="searchBar" placeholder="Item Search">
+
+                <select id="categorySelector" class="form-control">
+                    <option *ngFor="let option of service.categories">{{option}}</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="routeToSearchPage()" type="button">Search</button>
+                </div>
+            </div>
 
             <h3>Featured</h3>
             <div class="d-flex list-overflow">
                 <div *ngFor="let item of items; index as i">
-                    <app-item-card [id]="item.id" [name]="item.name" [category]="item.category" [price]="item.price">
+                    <app-item-card [id]="item._id" [name]="item.name" [category]="item.category" [price]="item.price" [url_link]="item.image_link">
                     </app-item-card>
                 </div>
             </div>
@@ -32,7 +40,7 @@
             <h3 class="mt-4 mb-2">Trending</h3>
             <div class="d-flex list-overflow">
                 <div *ngFor="let item of items; index as i">
-                    <app-item-card [id]="item.id" [name]="item.name" [category]="item.category" [price]="item.price">
+                    <app-item-card [id]="item._id" [name]="item.name" [category]="item.category" [price]="item.price" [url_link]="item.image_link">
                     </app-item-card>
                 </div>
             </div>
@@ -41,7 +49,7 @@
             <h3 class="mt-4 mb-2">Recent Arrivals</h3>
             <div class="d-flex list-overflow">
                 <div *ngFor="let item of items; index as i">
-                    <app-item-card [id]="item.id" [name]="item.name" [category]="item.category" [price]="item.price">
+                    <app-item-card [id]="item._id" [name]="item.name" [category]="item.category" [price]="item.price" [url_link]="item.image_link">
                     </app-item-card>
                 </div>
             </div>

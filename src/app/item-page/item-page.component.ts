@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemService } from '../item-service.service';
+import { ActivatedRoute } from '@angular/router'
+import { AccountService } from '../account-service.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-item-page',
@@ -9,30 +13,46 @@ export class ItemPageComponent implements OnInit {
   // The item that is being displayed in this page.
   // Requires the fields: name, price, description, url_link (TODO)
   displayedItem: any = {};
-  quantity : number = 1;
+  quantity: number = 1;
+  submitted : Boolean = false;
 
-  constructor() {
-    // Dummy data, fetch from backend in completed version.
+  constructor(
+    private itemService: ItemService,
+    public accountService: AccountService,
+    public cart: CartService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe((params) => {
+      itemService.getByID(params['itemId']).subscribe((fetched: any[]) => {
+        this.displayedItem = fetched[0];
+      })
+    })
 
-    this.displayedItem = {
-      name: "Item name",
-      price: 1,
-      description: "The description of the item.",
-      url_link: "https://dummyimage.com/600x400/000/fff"
-    }
+    itemService.getByID("5efcab3dad450a2505872f61").subscribe((res) => {
+      console.log(res);
+    })
   }
 
-  increaseQuantity() : void{
+  increaseQuantity(): void {
     this.quantity++;
   }
 
-  decreaseQuantity() : void{
-    if(this.quantity > 1){
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
       this.quantity--;
     }
   }
 
-  ngOnInit(): void {
+  addItemToCart() {
+    this.cart.addItem(this.displayedItem._id, this.displayedItem.name, this.displayedItem.price, this.quantity);
+    
+    this.submitted = true;
   }
 
+  showPlaceholder(){
+    this.displayedItem.image_link = "/assets/dummy_item.png"
+  }
+ 
+  ngOnInit(): void {
+  }
 }

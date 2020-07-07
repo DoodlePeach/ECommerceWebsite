@@ -1,19 +1,19 @@
-<ul class="nav nav-tabs mx-auto d-flexx justify-content-center w-75 mt-5 mb-3" id="myTab" role="tablist">
+<ul class="nav nav-tabs mx-auto d-flex justify-content-center w-75 mt-5 mb-3" id="myTab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">New</a>
+        <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" aria-controls="new">New</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All</a>
+        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" aria-controls="all">All</a>
     </li>
 </ul>
 
-<div class="tab-content w-75 mx-auto p-5" id="myTabContent">
+<div class="tab-content w-75 mx-auto p-5 overflow-auto" id="myTabContent">
     <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
         <app-item-form></app-item-form>
     </div>
     <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
-        <table class="table">
-            <thead>
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
                     <th>Name</th>
                     <th>Category</th>
@@ -29,7 +29,7 @@
                     <td>{{item.category}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.price}}</td>
-                    <td>{{item.url_link}}</td>
+                    <td>{{item.image_link}}</td>
                 </tr>
             </tbody>
         </table>

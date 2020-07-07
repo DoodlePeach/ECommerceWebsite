@@ -7,7 +7,7 @@ export class AccountModel {
         public password: string,
         public username: string,
         public address: string,
-        public history : ItemModel[]
+        public history : any[]
     ) { }
 }
 

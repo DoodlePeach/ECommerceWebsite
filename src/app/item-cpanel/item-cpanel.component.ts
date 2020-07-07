@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemModel } from '../item-model';
+import { ItemService } from '../item-service.service';
 
 @Component({
   selector: 'app-item-cpanel',
@@ -7,11 +8,13 @@ import { ItemModel } from '../item-model';
   styleUrls: ['./item-cpanel.component.css']
 })
 export class ItemCpanelComponent implements OnInit {
-  fetched : ItemModel[];
+  fetched : Object[];
 
-  constructor() { 
-    this.fetched = [];
-    // fetch data from backed here for showing populating the list in all section.
+  constructor(
+    public itemService : ItemService) {
+      itemService.getAll().subscribe((data : Object[]) => {
+        this.fetched = data;
+      }) 
   }
 
   ngOnInit(): void {

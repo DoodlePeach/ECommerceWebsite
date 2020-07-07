@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ItemModel } from '../item-model'
+import { ItemService } from '../item-service.service';
 
 @Component({
   selector: 'app-item-form',
@@ -10,11 +11,12 @@ export class ItemFormComponent implements OnInit {
   model: ItemModel = new ItemModel("", "", "", "", 0, "")
   submitted = false
 
+  constructor(public itemService : ItemService){}
+
   onSubmit() : void {
     this.submitted = true;
-
-    // call the relevant service for POSTing data to the database.
-    // some error handling goes here too...
+    this.itemService.addItem(this.model).subscribe((data) => {
+    });
   }
 
   ngOnInit(): void {

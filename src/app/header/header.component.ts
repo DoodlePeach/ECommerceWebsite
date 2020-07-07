@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../account-service.service';
 
 // Lifted the header from here:
 // https://codepen.io/arifmanzoor11/pen/YaYrYJ?editors=1100
@@ -12,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public accountService : AccountService) { }
 
   ngOnInit(): void {
   }

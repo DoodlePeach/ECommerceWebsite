@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchBarComponent } from '../search-bar/search-bar.component'
+import { ActivatedRoute} from '@angular/router'
+import { ItemService } from '../item-service.service';
 
 @Component({
   selector: 'app-search-page',
@@ -8,7 +9,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component'
 })
 export class SearchPageComponent implements OnInit {
   // Fill up this array with fetched data to show stuff in the search page.
-  items : Object[] = [];
+  items: any[] = [];
 
   // This variable determines how much items are shown in a single page.
   pageLength = 20;
@@ -16,21 +17,38 @@ export class SearchPageComponent implements OnInit {
   // The currently selected page.
   currentPage = 1;
 
-  constructor() {
+  constructor(
+    private route: ActivatedRoute,
+    public itemService: ItemService) {
 
-    // Dummy data.
-    for(let i = 0; i < 100; i++)
-    {
-      this.items.push({
-        title : 'FS-Semester-Project',
-        id  : 123,
-        name  : "Huawei E100 2040",
-        category : "Mobile",
-        price : i})
-    }
   }
 
   ngOnInit(): void {
+    let inputTag: HTMLInputElement = document.getElementById("searchBar") as HTMLInputElement;
+    let categoryTag : HTMLSelectElement = document.getElementById("categorySelector") as HTMLSelectElement;
+
+
+    this.route.params.subscribe((params) => {
+      let searchString : string = params['searchString'];
+      
+      if(searchString == undefined)
+        searchString = "";
+
+      inputTag.value = searchString;
+      categoryTag.value = params['categoryString'];
+
+      this.itemService.getByNameAndCategory(searchString, params['categoryString']).subscribe((fetched: Object[]) => {
+        this.items = fetched;
+      })
+    })
   }
 
+  onSearchClicked(){
+    let inputTag: HTMLInputElement = document.getElementById("searchBar") as HTMLInputElement;
+    let categoryTag : HTMLSelectElement = document.getElementById("categorySelector") as HTMLSelectElement;
+
+    this.itemService.getByNameAndCategory(inputTag.value, categoryTag.value).subscribe((fetched: Object[]) => {
+      this.items = fetched;
+    })
+  }
 }

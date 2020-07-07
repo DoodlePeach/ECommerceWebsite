@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemCardComponent } from '../item-card/item-card.component';
-import { SearchBarComponent } from '../search-bar/search-bar.component'
+import { ItemService } from '../item-service.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-home-page',
@@ -8,22 +8,29 @@ import { SearchBarComponent } from '../search-bar/search-bar.component'
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+  // The items being shown on the front page.
   items : Object[] = [];
+
+  // The number of items beign shown.
+  length : number = 5;
   
-  constructor()
+  constructor(public service : ItemService, private router : Router)
   {
-    for(let i = 0; i < 5; i++)
-    {
-      this.items.push({
-        title : 'FS-Semester-Project',
-        id  : 123,
-        name  : "Huawei E100 2040",
-        category : "Mobile",
-        price : 12})
-    }
+    service.getAll().subscribe((data : Object[])=>{
+      for(let i = 0; i < data.length && i < this.length; i++){
+        this.items.push(data[i]);
+      }
+    })
   }
 
   ngOnInit(): void {
   }
 
+  routeToSearchPage(){
+    let inputTag : HTMLInputElement = document.getElementById("searchBar") as HTMLInputElement
+    let categoryTag : HTMLSelectElement = document.getElementById("categorySelector") as HTMLSelectElement;
+
+    this.router.navigate(["/search", {searchString : inputTag.value, categoryString: categoryTag.value}]);
+  }
 }
+  

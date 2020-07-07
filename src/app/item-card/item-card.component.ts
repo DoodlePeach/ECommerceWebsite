@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-card',
@@ -21,9 +22,19 @@ export class ItemCardComponent implements OnInit {
   @Input() category : string;
   // The price of the item.
   @Input() price : number; 
+  // The url of the image of the item.
+  @Input() url_link : string;
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
+  }
+
+  onUserClick() {
+    this.router.navigate(['/item', { itemId: this.id.toString() }])
+  }
+
+  setPlaceholderImage(){
+    this.url_link = "/assets/dummy_item.png";
   }
 }

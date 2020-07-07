@@ -1,5 +1,5 @@
-<div class="card" class="shadow-sm m-1 border card-width">
-    <img class="card-img-top" src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" alt="Card image cap">
+<div (click)="onUserClick()" class="card" class="shadow-sm m-1 border card-width">
+    <img class="card-img-top img-fluid" [src]="url_link" (error)="setPlaceholderImage()" alt="Card image cap">
 
     <div class="card-body p-2">
         <h4 class="card-title mb-0">{{name}}</h4>
