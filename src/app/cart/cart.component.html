@@ -1,0 +1,31 @@
+<div *ngIf="cart.items.length > 0 && !successfulCheckout" class="w-75 d-flex flex-column mx-auto p-3">
+    <h3>Cart</h3>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th class="text-center">Name</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Remove</th>
+        </thead>
+
+        <tbody>
+            <tr cart-row *ngFor="let item of cart.items" [id]="item.id" [name]="item.name" [quantity]="item.quantity" [price]="item.price"></tr>
+            <tr>
+                <td colspan="4" class="text-center align-middle">
+                    Total: {{cart.total}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button (click)="checkout()" class="btn btn-success">Checkout</button>
+</div>
+
+<div *ngIf="cart.items.length == 0" class="alert alert-danger text-center w-75 mx-auto mt-5 p-3">
+    There is currently nothing in your cart.
+</div>
+
+<div *ngIf="successfulCheckout" class="alert alert-success text-center w-75 mx-auto mt-5 p-3">
+    Your order has been recieved.
+</div>

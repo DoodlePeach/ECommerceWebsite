@@ -1,0 +1,38 @@
+<p>This form adds new items to the database</p>
+
+<form #itemForm="ngForm" (ngSubmit)="onSubmit(); itemForm.reset()">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name">
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" required [(ngModel)]="model.category" name="category" class="form-control">
+            <option *ngFor="let option of itemService.categories">{{option}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea type="text" class="form-control" id="description" required [(ngModel)]="model.description" name="description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" required [(ngModel)]="model.price" name="price">
+    </div>
+
+    <div class="form-group">
+        <label for="url_link">Image Link</label>
+        <input type="url" class="form-control " id="url_link" required [(ngModel)]="model.url_link" name="url_link">
+    </div>
+
+
+    <button type="submit" class="btn btn-dark" [disabled]="!itemForm.form.valid">Add item to database</button>
+</form>
+
+
+<div *ngIf="submitted" class="alert alert-success m-3">
+    <p class="m-0 text-center">The item has been successfully inserted into the database</p>
+</div>

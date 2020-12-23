@@ -1,0 +1,55 @@
+<div *ngIf="!accountService.isLoggedIn" class="alert alert-danger w-75  mx-auto m-3">
+    <p class="text-center m-0">You are not logged in</p>
+</div>
+
+<div *ngIf="accountService.isLoggedIn">
+    <ul class="nav nav-tabs mx-auto d-flexx justify-content-center w-50 mt-5 mb-3" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">Account Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">Order History</a>
+        </li>
+    </ul>
+
+    <div *ngIf="accountService.isLoggedIn" class="tab-content w-75 mx-auto p-5" id="myTabContent">
+        <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+            <div class="d-flex flex-column w-25 mx-auto">
+                <h3>Name</h3>
+                <p class="mb-3">{{accountService.account.username}}</p>
+                <h3>Email</h3>
+                <p class="mb-3">{{accountService.account.id}}</p>
+                <h3>Password</h3>
+                <p class="mb-3">{{accountService.account.password}}</p>
+                <h3>Address</h3>
+                <p class="mb-3">{{accountService.account.address}}</p>
+
+                <button (click)="onSignoutClicked()" class="btn btn-warning">Signout</button>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
+            <div class="mt-3 card d-flex flex-column justify-content-center pl-3 pt-3 pr-3" *ngFor="let cart of accountService.account.history[0].cart">
+                <p><b>Status: </b>{{cart.status}}</p>
+                <p><b>Date: </b>{{cart.date}}</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 33%;">Name</th>
+                            <th style="width: 33%;">Price</th>
+                            <th style="width: 33%;">Quantity</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of cart.cart">
+                            <td>{{item.name}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.quantity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

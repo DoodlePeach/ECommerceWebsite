@@ -1,0 +1,29 @@
+<div class="mx-auto w-75 h-100">
+    <div class="d-flex align-items-center mt-5 mb-5">
+        <img [src]="displayedItem.image_link" (error)="showPlaceholder()" class="w-50">
+
+        <div class="d-flex flex-column justify-content-center ml-5 w-50">
+            <h3>{{displayedItem.name}}</h3>
+            <p>{{displayedItem.description}}</p>
+            <p class="mb-0"><b>Price</b> {{displayedItem.price}}$</p>
+
+            <div class="d-flex mt-3 mb-3">
+                <b class="p-0 mt-2 mr-5">Quantity</b>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-light" (click)="decreaseQuantity()">-</button>
+                    <p class="p-0 ml-3 mr-3 mt-0 mb-0">{{quantity}}</p>
+                    <button class="btn btn-light" (click)="increaseQuantity()">+</button>
+                </div>
+            </div>
+
+            <div *ngIf="!accountService.isLoggedIn" class="alert alert-danger">
+                <p class="m-0 text-center">Please login to but items.</p>
+            </div>
+            <button *ngIf="accountService.isLoggedIn" (click)="addItemToCart()" type="button" class="btn btn-dark">Add to cart</button>
+            <div *ngIf="submitted" class="alert alert-success mt-5">
+                <p class="m-0 text-center">Item added to cart.</p>
+            </div>
+        </div>
+    </div>
+</div>
